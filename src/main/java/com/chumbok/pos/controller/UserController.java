@@ -2,6 +2,7 @@ package com.chumbok.pos.controller;
 
 import com.chumbok.pos.dto.PersistedObjId;
 import com.chumbok.pos.entity.User;
+import com.chumbok.pos.repository.UserRepository;
 import com.chumbok.pos.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,11 +15,14 @@ import java.util.List;
 @RequestMapping("/users")
 public class UserController {
 
-   /* @Autowired
+    @Autowired
     private UserService userService;
+    
+    @Autowired
+    private UserRepository userRepo;
 
     @ResponseStatus(value = HttpStatus.OK)
-    @RequestMapping(path = "", method = RequestMethod.GET)
+    @RequestMapping(path = "/all", method = RequestMethod.GET)
     public List<User> getUsers() {
         List<User> list = userService.getAllUsers();
         return list;
@@ -27,14 +31,14 @@ public class UserController {
     @ResponseStatus(value = HttpStatus.CREATED)
     @RequestMapping(path = "", method = RequestMethod.POST)
     public PersistedObjId createUser(@RequestBody @Valid User user) {
-        userService.createUser(user);
+        userRepo.save(user);
         return new PersistedObjId(user.getId());
     }
 
     @ResponseStatus(value = HttpStatus.OK)
     @RequestMapping(path = "/{id}", method = RequestMethod.GET)
-    public User getUserById(@PathVariable("id") Integer id) {
-        User user = userService.getUser(id);
+    public User getUserById(@PathVariable("id") Long id) {
+        User user = userRepo.getOne(id);
         return user;
     }
 
@@ -42,14 +46,14 @@ public class UserController {
     @RequestMapping(path = "/{id}", method = RequestMethod.PUT)
     public void updateUser(@PathVariable("id") Long id, @RequestBody @Valid User user) {
         user.setId(id);
-        userService.updateUser(user);
+        userRepo.save(user);
     }
 
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
     public void deleteUser(@PathVariable("id") Long id) {
-        userService.deleteUser(id);
-    }*/
+        userRepo.delete(id);
+    }
 }
 
 

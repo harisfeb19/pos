@@ -24,7 +24,7 @@ public class LoginController {
     public ModelAndView login() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("login");
-        System.out.println("----------------------------nishi login");
+        System.out.println("----------------------------Haris login");
         return modelAndView;
     }
 

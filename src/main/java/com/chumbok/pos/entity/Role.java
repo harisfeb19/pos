@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "role")
+
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -11,7 +12,13 @@ public class Role {
 
     private String role;
 
-    public Long getId() {
+    public Role(String userRole) {
+		// TODO Auto-generated constructor stub
+    	this.role = userRole;
+	}
+
+
+	public Long getId() {
         return id;
     }
 
