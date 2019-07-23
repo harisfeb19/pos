@@ -64,7 +64,7 @@ public class ProductController {
         return modelAndView;
     }
 
-   /* @RequestMapping(path = "/products", method = RequestMethod.GET)
+    @RequestMapping(path = "/products", method = RequestMethod.GET)
     public ModelAndView showProducts(@RequestParam(required = false) String displayName) {
         if (displayName == null) {
             ModelAndView modelAndView = new ModelAndView();
@@ -81,7 +81,7 @@ public class ProductController {
             System.out.println("nishi-------------showProducts: " + displayName);
             return modelAndView;
         }
-    }*/
+    }
 
     //-------------------------------------------
     @RequestMapping(value = "/pageable", method = RequestMethod.GET)

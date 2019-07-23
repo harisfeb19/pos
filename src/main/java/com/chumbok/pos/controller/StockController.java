@@ -2,20 +2,25 @@ package com.chumbok.pos.controller;
 
 import com.chumbok.pos.dto.StockDTO;
 import com.chumbok.pos.entity.Stock;
+import com.chumbok.pos.repository.StockRepository;
 import com.chumbok.pos.service.ProductService;
 import com.chumbok.pos.service.StockService;
 import com.chumbok.pos.utility.DateConversion;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.text.ParseException;
+import java.util.List;
 
 @Controller
 public class StockController {
@@ -24,6 +29,8 @@ public class StockController {
     private StockService stockService;
     @Autowired
     private ProductService productService;
+    
+    private StockRepository stockRepository;
 
     @RequestMapping(path = "/addStock", method = RequestMethod.GET)
     public ModelAndView showAddStockForm(@RequestParam(required = false) Long productId) throws Exception{
@@ -61,13 +68,13 @@ public class StockController {
 
     }
 
-    /*@ResponseStatus(value = HttpStatus.OK)
-    @RequestMapping(path = "", method = RequestMethod.GET)
+    @RequestMapping("/stocklist")
+    @ResponseBody
     public List<Stock> getStocks() {
-        List<Stock> list = stockService.getAllStocks();
-        return list;
+        //List<Stock> list = stockRepository.findAll();
+        return stockRepository.findAll();
     }
-
+    /*
     @ResponseStatus(value = HttpStatus.CREATED)
     @RequestMapping(path = "", method = RequestMethod.POST)
     public PersistedObjId createStock(@RequestBody @Valid StockDTO stockDTO) {
